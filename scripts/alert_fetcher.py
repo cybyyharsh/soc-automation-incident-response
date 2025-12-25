@@ -1,7 +1,8 @@
-def fetch_alerts(limit=5):
+USE_MOCK = True
+
+def fetch_mock_alerts():
     """
     Mock Wazuh alerts for development/testing.
-    Replace with real Wazuh API in production.
     """
     return {
         "data": [
@@ -19,6 +20,18 @@ def fetch_alerts(limit=5):
             }
         ]
     }
+
+def fetch_alerts_from_wazuh():
+    """
+    Placeholder for real Wazuh API integration.
+    """
+    raise NotImplementedError("Live Wazuh API integration not enabled")
+
+def fetch_alerts(limit=5):
+    if USE_MOCK:
+        return fetch_mock_alerts()
+    else:
+        return fetch_alerts_from_wazuh()
 
 if __name__ == "__main__":
     alerts = fetch_alerts()
