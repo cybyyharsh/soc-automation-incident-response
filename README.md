@@ -75,3 +75,25 @@ All components are implemented using **open-source and free tools**.
 
 ## Project Structure
 
+## SIEM Integration — Wazuh
+
+This project is designed to align with **Wazuh SIEM**, a widely used open-source security monitoring platform.
+
+### Integration Approach
+- The alert ingestion layer is architected to consume alerts from **Wazuh Manager via its REST API**
+- For development and demonstration purposes, **mock alerts** are used to simulate real SOC conditions
+- The same ingestion module can be switched to **live Wazuh alerts** with minimal configuration changes
+
+### Why Mock Alerts Are Used
+In enterprise SOC environments:
+- Direct access to production SIEM systems is restricted
+- Automation development is typically performed against mock or staging data
+- This approach enables rapid development without impacting SOC operations
+
+### Production-Ready Design
+In a production deployment:
+- Wazuh Manager would forward alerts to the automation engine
+- Alerts would be fetched from the Wazuh API (`/security/events`)
+- The remaining pipeline (enrichment, severity scoring, incident creation, reporting) remains unchanged
+
+This design follows **industry-standard SOC automation practices** and ensures compatibility with real Wazuh deployments.
