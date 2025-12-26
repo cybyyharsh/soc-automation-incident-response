@@ -1,108 +1,108 @@
-# SOC Automation & Incident Response Platform
+SOC Automation & Incident Response Platform
+Overview
 
-## Overview
-This project implements an **end-to-end Security Operations Center (SOC) automation pipeline** that simulates real-world incident detection, enrichment, prioritization, and response workflows.  
-It is designed to demonstrate **SOC analyst decision-making**, **automation logic**, and **incident response readiness** using a modular, production-aligned architecture.
+This project is an end-to-end SOC Automation and Incident Response platform that simulates how modern enterprise Security Operations Centers (SOC) ingest alerts, enrich them with threat intelligence, assess severity, create incidents, trigger automated response playbooks (SOAR-style), generate alerts, and produce incident reports — all through a single command execution.
 
-The platform executes the full SOC workflow using a **single command**, making it suitable for demos, interviews, and portfolio evaluation.
+The system is designed with modularity, safety, and realism, making it suitable for development, demonstrations, and interview evaluation without relying on paid or production services.
 
----
+Key Objectives
 
-## Problem Statement
-Modern SOC teams face:
-- High alert volumes from SIEM platforms
-- Manual and time-consuming alert triage
-- Delayed incident response
-- Inconsistent incident documentation
+Automate SOC alert handling from ingestion to response
 
-Manual handling of these tasks leads to analyst fatigue and increased response time.
+Demonstrate SOAR-style response playbooks
 
----
+Maintain dev-safe execution (no destructive actions)
 
-## Solution
-This project provides a **lightweight SOC automation framework** that:
-- Ingests security alerts
-- Enriches alerts with threat intelligence
-- Calculates severity using SOC decision logic
-- Creates structured incident cases
-- Generates audit-ready incident reports automatically
+Follow enterprise engineering practices
 
-The design follows **enterprise SOC best practices** with clear separation of concerns and extensible modules.
+Be fully explainable in SOC / Cybersecurity interviews
 
----
+Alert → Threat Enrichment → Severity Engine → Case Created
+                                   ↘
+                            Response Playbooks
+                              ├─ Block IP (simulated)
+                              ├─ Create Response Tasks
+                              └─ Host Containment (simulated)
+Features
+Alert Ingestion
 
-## Architecture Overview
+Simulated SIEM alerts (Wazuh-style structure)
 
-Alert Source (SIEM-aligned)
-        ↓
-Alert Ingestion Layer
-        ↓
+Easily extendable to live SIEM APIs
+
 Threat Intelligence Enrichment
-        ↓
+
+IP reputation enrichment (mocked for development)
+
+Pluggable design for VirusTotal or other TI feeds
+
 Severity Scoring Engine
-        ↓
-Incident Creation (Case Management)
-        ↓
-Automated Incident Report (PDF)
 
----
+Dynamic severity calculation based on:
 
-## Technology Stack
+Alert level
 
-- **Language:** Python 3  
-- **SIEM Alignment:** Wazuh (API-ready design)  
-- **Threat Intelligence:** IP reputation enrichment (mock, production-ready)  
-- **Incident Management:** TheHive-aligned case workflow  
-- **Reporting:** PDF generation using ReportLab  
-- **Platform:** Linux (Kali / Ubuntu)  
-- **Version Control:** Git & GitHub  
+Threat intelligence score
 
-All components are implemented using **open-source and free tools**.
+Outputs: LOW, MEDIUM, HIGH
 
----
+Incident Creation
 
-## Key Features
+Centralized incident object creation
 
-- Modular SOC automation pipeline
-- Threat intelligence enrichment for alert context
-- Rule-based severity scoring aligned with SOC triage practices
-- Automated incident creation workflow
-- Professional PDF incident reports
-- One-command execution for full pipeline demo
-- Clean Git history and enterprise-grade structure
+Designed to be compatible with TheHive-style case management
 
----
+Clean separation between pipeline and connector logic
 
-## Project Structure
+SOAR-Style Response Playbooks (Phase C)
 
-## SIEM Integration — Wazuh
+Executed automatically for HIGH severity incidents:
 
-This project is designed to align with **Wazuh SIEM**, a widely used open-source security monitoring platform.
+IP Blocking (Simulated)
+Records firewall-style block actions safely
 
-### Integration Approach
-- The alert ingestion layer is architected to consume alerts from **Wazuh Manager via its REST API**
-- For development and demonstration purposes, **mock alerts** are used to simulate real SOC conditions
-- The same ingestion module can be switched to **live Wazuh alerts** with minimal configuration changes
+Response Task Creation
+Generates analyst investigation tasks
 
-### Why Mock Alerts Are Used
-In enterprise SOC environments:
-- Direct access to production SIEM systems is restricted
-- Automation development is typically performed against mock or staging data
-- This approach enables rapid development without impacting SOC operations
+Host Containment (Simulated)
+Marks affected host as isolated
 
-### Production-Ready Design
-In a production deployment:
-- Wazuh Manager would forward alerts to the automation engine
-- Alerts would be fetched from the Wazuh API (`/security/events`)
-- The remaining pipeline (enrichment, severity scoring, incident creation, reporting) remains unchanged
+All response actions are logged as structured JSON artifacts.
 
-This design follows **industry-standard SOC automation practices** and ensures compatibility with real Wazuh deployments.
-## SOC Automation Flow
+Alerting (Development-Safe)
 
-```text
-Alert → Severity Engine → Case Created
-                     ↘
-               Response Playbook
-                 ├─ Block IP (simulated)
-                 ├─ Create Response Tasks
-                 └─ Host Containment (simulated)
+High-severity incidents generate alerts
+
+Alerts are written to a local outbox (no SMTP / no secrets)
+
+Ensures deterministic testing and CI compatibility
+
+Incident Report Generation
+
+Automatically generates incident reports
+
+Designed for SOC documentation and audit workflows
+
+One-Command Orchestration
+
+Entire pipeline runs with a single command
+
+No manual intervention required
+
+soc-automation-incident-response/
+│
+├─ scripts/
+│   ├─ alert_fetcher.py          # SIEM alert ingestion
+│   ├─ threat_enrichment.py      # Threat intelligence enrichment
+│   ├─ severity_engine.py        # Severity scoring logic
+│   ├─ thehive_connector.py      # Incident creation (TheHive-style)
+│   ├─ notifier.py               # Dev-safe alerting (outbox)
+│   ├─ playbooks.py              # SOAR response playbooks
+│   ├─ report_generator.py       # Incident report generation
+│   └─ run_pipeline.py           # End-to-end orchestrator
+│
+├─ actions/                      # SOAR playbook execution logs
+├─ outbox/                       # Alert notifications (dev-safe)
+├─ reports/                      # Generated incident reports
+├─ README.md
+└─ .gitignore
