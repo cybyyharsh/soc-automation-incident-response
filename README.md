@@ -97,3 +97,12 @@ In a production deployment:
 - The remaining pipeline (enrichment, severity scoring, incident creation, reporting) remains unchanged
 
 This design follows **industry-standard SOC automation practices** and ensures compatibility with real Wazuh deployments.
+## SOC Automation Flow
+
+```text
+Alert → Severity Engine → Case Created
+                     ↘
+               Response Playbook
+                 ├─ Block IP (simulated)
+                 ├─ Create Response Tasks
+                 └─ Host Containment (simulated)

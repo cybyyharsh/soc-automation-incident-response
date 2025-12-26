@@ -1,0 +1,6 @@
+{
+  "action": "contain_host",
+  "host": "linux-server",
+  "status": "isolated (simulated)",
+  "timestamp": "2025-12-26T16:56:58.312377Z"
+}

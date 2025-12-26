@@ -1,0 +1,19 @@
+{
+  "action": "create_tasks",
+  "case_id": "2aeb95c5",
+  "tasks": [
+    {
+      "task": "Validate alert authenticity"
+    },
+    {
+      "task": "Check related logs and events"
+    },
+    {
+      "task": "Assess blast radius"
+    },
+    {
+      "task": "Confirm containment effectiveness"
+    }
+  ],
+  "timestamp": "2025-12-26T16:56:58.312246Z"
+}

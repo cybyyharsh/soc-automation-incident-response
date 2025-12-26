@@ -1,0 +1,6 @@
+{
+  "action": "block_ip",
+  "ip": "185.220.101.1",
+  "method": "simulated-firewall",
+  "timestamp": "2025-12-26T16:56:58.312129Z"
+}
