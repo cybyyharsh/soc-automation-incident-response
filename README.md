@@ -175,6 +175,21 @@ Secure, testable cybersecurity engineering practices
 Ability to design enterprise-ready systems
 
 
+🔮 Future Enhancements
+
+Live Wazuh API integration
+
+Real VirusTotal enrichment
+
+Firewall / EDR API-based containment
+
+Human-in-the-loop approval workflows
+
+Ticketing integrations (Jira / ServiceNow)
+
+Slack / Email / SOAR platform connectors
+
+
 ⚠️ Limitations
 
 SIEM, threat intelligence, and containment actions are simulated
