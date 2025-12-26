@@ -36,3 +36,12 @@ Thumbs.db
 # ===============================
 wazuh_logs/
 elastic_data/
+
+
+# Ignore generated SOAR artifacts
+actions/*
+outbox/*
+
+# Keep directory structure
+!actions/.keep
+!outbox/.keep
